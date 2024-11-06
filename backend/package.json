@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon ./src/index.js",
     "e2e": "cross-env DOTENV_CONFIG_PATH=.env.e2e nodemon",
-    "build": "copyfiles -u 1 src/**/* build"
+    "build": "mkdir -p build && cp -r src/* build/"
   },
   "author": "",
   "license": "ISC",
