@@ -55,9 +55,13 @@ router.get("/validate-token", verifyToken, (req, res) => {
   res.status(200).send({ userId: req.userId });
 });
 
-router.post("/logout",(req,res)=>{
-  res.clearCookie("auth_token");
-  res.status(200).send({message:"Logged out successfully"});
-})
+router.post("/logout", (req, res) => {
+  res.clearCookie("auth_token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: 'None',
+  });
+  res.status(200).send({ message: "Logged out successfully" });
+});
 
 export default router;
