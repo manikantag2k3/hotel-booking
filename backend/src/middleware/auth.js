@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 
-
 const verifyToken = (req, res, next) => {
   const token = req.cookies["auth_token"];
+  console.log("Token received:", token); // Add this line
   if (!token) {
     return res.status(401).json({ message: "Access denied" });
   }
@@ -12,7 +12,8 @@ const verifyToken = (req, res, next) => {
     req.userId = decoded.userId;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Access denied" });
+    console.log("Token verification error:", error); // Add this line
+    return res.status(401).json({ message: "Invalid token" });
   }
 };
 
